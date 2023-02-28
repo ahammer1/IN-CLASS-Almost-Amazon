@@ -1,18 +1,18 @@
-import { getAuthorBooks, getAuthors } from '../api/authorData';
+import { getAuthors, getFavoriteAuthor } from '../api/authorData';
 import { signOut } from '../utils/auth';
 import { getBooks, booksOnSale } from '../api/bookData';
 import { showBooks } from '../pages/books';
 import { showAuthors } from '../pages/authors';
 
 // navigation events
-const navigationEvents = () => {
+const navigationEvents = (user) => {
   // LOGOUT BUTTON
   document.querySelector('#logout-button')
     .addEventListener('click', signOut);
 
   // TODO: BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
-    booksOnSale().then(showBooks);
+    booksOnSale(user.uid).then(showBooks);
   });
 
   // TODO: ALL BOOKS
@@ -29,7 +29,7 @@ const navigationEvents = () => {
   });
 
   document.querySelector('#favoriteauthor').addEventListener('click', () => {
-    getAuthorBooks().then(showAuthors);
+    getFavoriteAuthor().then(showAuthors);
   });
 
   // STRETCH: SEARCH
