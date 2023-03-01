@@ -6,7 +6,7 @@ import addBookForm from '../components/forms/addBookForm';
 import addAuthorForm from '../components/forms/addAuthorForm';
 import { getBookDetails, getAuthorDetails, deleteAuthorBooksRelationship } from '../api/mergedData';
 import viewBook from '../pages/viewBook';
-import selectAuthor from '../components/forms/selectAuthor';
+import viewAuthor from '../pages/viewauthor';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -64,9 +64,12 @@ const domEvents = () => {
 
       getSingleAuthor(firebaseKey).then((authorObj) => addAuthorForm(authorObj));
     }
+
     if (e.target.id.includes('view-author-btn')) {
+    //  console.warn('VIEW BOOK', e.target.id);
+    //  console.warn(e.target.id.split('--'));
       const [, firebaseKey] = e.target.id.split('--');
-      getAuthorDetails(firebaseKey).then(selectAuthor);
+      getAuthorDetails(firebaseKey).then(viewAuthor);
     }
     // FIXME: ADD CLICK EVENT FOR DELETING AN AUTHOR
     if (e.target.id.includes('delete-author-btn')) {
