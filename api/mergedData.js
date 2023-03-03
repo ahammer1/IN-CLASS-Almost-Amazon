@@ -14,11 +14,9 @@ const getBookDetails = (firebaseKey) => new Promise((resolve, reject) => {
 });
 const getAuthorDetails = (firebaseKey) => new Promise((resolve, reject) => {
   getSingleAuthor(firebaseKey).then((authorObject) => {
-    console.log(authorObject);
     getAuthorBooks(authorObject.firebaseKey)
       .then((bookObject) => resolve({ ...authorObject, bookObject }));
   }).catch(reject);
-  console.log(firebaseKey);
 });
 
 const deleteAuthorBooksRelationship = (firebaseKey) => new Promise((resolve, reject) => {
